@@ -28,10 +28,12 @@ def run():
     print("running")
     core.cleanScreen()
 
+    #Déplacement
+    core.memory("position", core.memory("position") + core.memory("speed"))
 
     #Contrôle
     if core.getKeyPressList("z"):
-        core.memory("position", core.memory("position") + core.memory("speed"))
+        core.memory("position", core.memory("position") + core.memory("speed")*2)
         a = core.memory("speed").angle_to(core.memory("direction"))
         b = core.memory("direction").cross(core.memory("speed"))
 
@@ -40,6 +42,9 @@ def run():
                 core.memory("speed", core.memory("speed").rotate(3))
             if b > 0:
                 core.memory("speed", core.memory("speed").rotate(-3))
+     
+    if core.getKeyReleaseList("z"):
+        core.memory("position", core.memory("position") + core.memory("speed") * 0.6)
 
     if core.getKeyPressList("d"):
         core.memory("direction", core.memory("direction").rotate(4))
